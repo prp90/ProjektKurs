@@ -10,7 +10,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 public class DialogActivity extends AppCompatActivity {
+
+
+    private Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +40,37 @@ public class DialogActivity extends AppCompatActivity {
         alertDialogBuilder
                 .setMessage("Bla bla MSG")
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                       Log.d("debug", "YES");
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Runnable runnable = new Runnable() {
+                            public void run() {
+
+                                long endTime = System.currentTimeMillis() + 20 * 1000;
+
+                                while (System.currentTimeMillis() < endTime) {
+                                    synchronized (this) {
+                                        try {
+                                            InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+
+                                            socket = new Socket(serverAddr, 8383);
+
+                                            PrintWriter out = new PrintWriter(new BufferedWriter(
+                                                    new OutputStreamWriter(socket.getOutputStream())),
+                                                    true);
+                                            out.println("android yes lamp");
+                                        } catch (UnknownHostException e) {
+                                            e.printStackTrace();
+                                        } catch (IOException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                        Thread mythread = new Thread(runnable);
+                        mythread.start();
+
+                        Log.d("debug", "YES");
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -44,8 +83,8 @@ public class DialogActivity extends AppCompatActivity {
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-        // show it
-        alertDialog.show();
+        if (!msg.contains("Token"))
+            alertDialog.show();
     }
 
 }

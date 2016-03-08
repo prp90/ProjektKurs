@@ -12,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
@@ -57,31 +55,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
-
-//        on_button = (Button) findViewById(R.id.turn_on);
-//        off_button = (Button) findViewById(R.id.turn_off);
-//        nothing_button = (Button) findViewById(R.id.do_nothing);
-//
-//        on_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("debug", "TURN ON pressed");
-//            }
-//        });
-//
-//        off_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("debug", "TURN OFF pressed");
-//            }
-//        });
-//
-//        nothing_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("debug", "DO NOTHING pressed");
-//            }
-//        });
     }
 
     @Override
@@ -111,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+
     }
 
     @Override
