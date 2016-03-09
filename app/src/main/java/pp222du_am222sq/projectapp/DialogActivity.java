@@ -57,7 +57,7 @@ public class DialogActivity extends AppCompatActivity {
                                             PrintWriter out = new PrintWriter(new BufferedWriter(
                                                     new OutputStreamWriter(socket.getOutputStream())),
                                                     true);
-                                            out.println("android yes lamp");
+                                            out.println("phone yes lamp");
                                         } catch (UnknownHostException e) {
                                             e.printStackTrace();
                                         } catch (IOException e1) {

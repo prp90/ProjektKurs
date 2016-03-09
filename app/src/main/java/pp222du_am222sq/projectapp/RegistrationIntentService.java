@@ -100,11 +100,13 @@ public class RegistrationIntentService extends IntentService {
             PrintWriter out = new PrintWriter(new BufferedWriter(
                     new OutputStreamWriter(socket.getOutputStream())),
                     true);
-            out.println("phone " + token);
+            out.println("phone token " + token);
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             String sentence = inFromServer.readLine();
             Log.d("debug", sentence);
 
+            out.println("phone close");
+            socket.close();
 
         } catch (UnknownHostException e1) {
             e1.printStackTrace();

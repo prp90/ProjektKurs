@@ -66,12 +66,10 @@ public class MyGcmListenerService extends GcmListenerService {
     private void sendNotification(String message) {
 
         Intent intent;
-        if(message.contains("Token received"))
-            intent = new Intent(this, MainActivity.class);
-        else
-        intent = new Intent(this, DialogActivity.class);
+
+        intent = new Intent(this, MainActivity.class);
         intent.putExtra("msg", message);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
