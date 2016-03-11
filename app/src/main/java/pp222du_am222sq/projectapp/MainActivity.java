@@ -14,6 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,7 +32,7 @@ import java.net.UnknownHostException;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    private Button on_button, off_button, nothing_button;
+    private Button on_button_lamp, off_button_lamp, on_button_fan, off_button_fan;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 
@@ -43,9 +45,159 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
 
         if (getIntent().hasExtra("msg")) {
+            setContentView(R.layout.activity_main_2);
+
+            on_button_fan = (Button) findViewById(R.id.onfan);
+            off_button_fan = (Button) findViewById(R.id.offfan);
+            on_button_lamp = (Button) findViewById(R.id.onlamp);
+            off_button_lamp = (Button) findViewById(R.id.offlamp);
+
+            on_button_lamp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Runnable runnable = new Runnable() {
+                        public void run() {
+
+                            long endTime = System.currentTimeMillis() + 20 * 1000;
+
+                            while (System.currentTimeMillis() < endTime) {
+                                synchronized (this) {
+                                    try {
+                                        InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+
+                                        socket = new Socket(serverAddr, 8383);
+
+                                        PrintWriter out = new PrintWriter(new BufferedWriter(
+                                                new OutputStreamWriter(socket.getOutputStream())),
+                                                true);
+                                        out.println("phone lamp on");
+                                        socket.close();
+                                        break;
+                                    } catch (UnknownHostException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    Thread mythread = new Thread(runnable);
+                    mythread.start();
+
+                }
+            });
+
+            off_button_lamp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Runnable runnable = new Runnable() {
+                        public void run() {
+
+                            long endTime = System.currentTimeMillis() + 20 * 1000;
+
+                            while (System.currentTimeMillis() < endTime) {
+                                synchronized (this) {
+                                    try {
+                                        InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+
+                                        socket = new Socket(serverAddr, 8383);
+
+                                        PrintWriter out = new PrintWriter(new BufferedWriter(
+                                                new OutputStreamWriter(socket.getOutputStream())),
+                                                true);
+                                        out.println("phone lamp off");
+                                        socket.close();
+                                        break;
+                                    } catch (UnknownHostException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    Thread mythread = new Thread(runnable);
+                    mythread.start();
+
+                }
+            });
+
+            on_button_fan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Runnable runnable = new Runnable() {
+                        public void run() {
+
+                            long endTime = System.currentTimeMillis() + 20 * 1000;
+
+                            while (System.currentTimeMillis() < endTime) {
+                                synchronized (this) {
+                                    try {
+                                        InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+
+                                        socket = new Socket(serverAddr, 8383);
+
+                                        PrintWriter out = new PrintWriter(new BufferedWriter(
+                                                new OutputStreamWriter(socket.getOutputStream())),
+                                                true);
+                                        out.println("phone fan on");
+                                        socket.close();
+                                        break;
+                                    } catch (UnknownHostException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    Thread mythread = new Thread(runnable);
+                    mythread.start();
+
+                }
+            });
+
+            off_button_fan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Runnable runnable = new Runnable() {
+                        public void run() {
+
+                            long endTime = System.currentTimeMillis() + 20 * 1000;
+
+                            while (System.currentTimeMillis() < endTime) {
+                                synchronized (this) {
+                                    try {
+                                        InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+
+                                        socket = new Socket(serverAddr, 8383);
+
+                                        PrintWriter out = new PrintWriter(new BufferedWriter(
+                                                new OutputStreamWriter(socket.getOutputStream())),
+                                                true);
+                                        out.println("phone fan off");
+                                        socket.close();
+                                        break;
+                                    } catch (UnknownHostException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    Thread mythread = new Thread(runnable);
+                    mythread.start();
+
+                }
+            });
             String msg = getIntent().getExtras().getString("msg", null);
             Log.d("debug", "GOT INTENT");
             if (msg != null) {
@@ -55,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     openDialogFan(msg);
             }
         } else {
+            setContentView(R.layout.activity_main);
             mRegistrationProgressBar = (ProgressBar) findViewById(R.id.registrationProgressBar);
             mRegistrationBroadcastReceiver = new BroadcastReceiver() {
                 @Override
@@ -120,7 +273,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
-        getIntent().removeExtra("msg");
 
     }
 
