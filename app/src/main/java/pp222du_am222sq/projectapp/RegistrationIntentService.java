@@ -93,6 +93,7 @@ public class RegistrationIntentService extends IntentService {
         byte[] abIn = new byte[1024];
         Log.d("debug", "inside registration");
         try {
+           //InetAddress serverAddr = InetAddress.getByName("192.168.0.197");
             InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
 
             socket = new Socket(serverAddr, 8383);

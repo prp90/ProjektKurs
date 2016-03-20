@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                 synchronized (this) {
                                     try {
                                         InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
-
+                                        //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
                                         socket = new Socket(serverAddr, 8383);
 
                                         PrintWriter out = new PrintWriter(new BufferedWriter(
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                 synchronized (this) {
                                     try {
                                         InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                        //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                         socket = new Socket(serverAddr, 8383);
 
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                                 synchronized (this) {
                                     try {
                                         InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                       // InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                         socket = new Socket(serverAddr, 8383);
 
@@ -175,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                                 synchronized (this) {
                                     try {
                                         InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                        //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                         socket = new Socket(serverAddr, 8383);
 
@@ -299,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                                     synchronized (this) {
                                         try {
                                             InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
-
+                                            //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
                                             socket = new Socket(serverAddr, 8383);
 
                                             PrintWriter out = new PrintWriter(new BufferedWriter(
@@ -334,6 +337,7 @@ public class MainActivity extends AppCompatActivity {
                                     synchronized (this) {
                                         try {
                                             InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                            //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                             socket = new Socket(serverAddr, 8383);
 
@@ -414,7 +418,8 @@ public class MainActivity extends AppCompatActivity {
                                 while (System.currentTimeMillis() < endTime) {
                                     synchronized (this) {
                                         try {
-                                            InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                           InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                            //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                             socket = new Socket(serverAddr, 8383);
 
@@ -450,6 +455,7 @@ public class MainActivity extends AppCompatActivity {
                                     synchronized (this) {
                                         try {
                                             InetAddress serverAddr = InetAddress.getByName("77.105.197.96");
+                                            //InetAddress serverAddr = InetAddress.getByName("192.168.0.192");
 
                                             socket = new Socket(serverAddr, 8383);
 
